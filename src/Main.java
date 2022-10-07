@@ -1,22 +1,16 @@
 import Game.Board.Board;
-import Game.Board.BoardInterface;
+import Game.Consts;
+import Game.Consts.type;
+import Game.Game;
+import Game.Players.AI;
+import Game.Players.Player;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        BoardInterface.type[][] BOARD = { {BoardInterface.type.X, BoardInterface.type.None, BoardInterface.type.O},
-                                          {BoardInterface.type.None, BoardInterface.type.None, BoardInterface.type.O},
-                                          {BoardInterface.type.X, BoardInterface.type.None, BoardInterface.type.O}};
-
-        Board b = new Board(BOARD);
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            int i = sc.nextInt();
-            int j = sc.nextInt();
-
-            b.place(BoardInterface.type.O, i, j);
-            System.out.println(b.is_win());
-        }
+        Player[] p = { new Player("Human", type.X), new AI(type.O, 9) };
+        Game g = new Game(p);
+        g.loop();
     }
 }
